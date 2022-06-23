@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  labels:
+    app: client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: route
+  template:
+    metadata:
+      labels:
+        app: route
+    spec:
+      containers:
+      - name: client
+        image: client_test
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+  labels:
+    app: server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: route
+  template:
+    metadata:
+      labels:
+        app: route
+    spec:
+      containers:
+      - name: server
+        image: server_test
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: route
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
