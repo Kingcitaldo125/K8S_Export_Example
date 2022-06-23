@@ -5,7 +5,7 @@ metadata:
   labels:
     app: client
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: route
@@ -28,7 +28,7 @@ metadata:
   labels:
     app: server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: route
