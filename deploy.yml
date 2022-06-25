@@ -20,6 +20,11 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8000
+        env:
+        - name: server_host
+          value: "http://my-service"
+        - name: server_port
+          value: "8000"
 ---
 apiVersion: apps/v1
 kind: Deployment
